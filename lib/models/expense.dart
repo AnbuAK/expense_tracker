@@ -33,3 +33,53 @@ class Expense{
     return formatter.format(date);
   }
 }
+
+class ExpenseBucket{
+  ExpenseBucket({
+    required this.category,
+    required this.expenses,
+  });
+  
+  ExpenseBucket.forCategory(List<Expense> allExpenses, 
+  this.category) 
+  : expenses = allExpenses 
+  .where((expense) => expense.category == category).toList();
+
+  final Category category;
+  final List<Expense> expenses;
+
+  double get totalExpenses{
+    double sum = 0;
+
+     for (final expense in expenses){
+      sum += expense.amount;
+     }
+     return sum;
+  }
+}
+
+class ExpenseTracker {
+  
+  Map<Category, double> categoryExpenses = {
+    Category.food: 0,
+    Category.entertainment: 0,
+    Category.travel: 0,
+    Category.bills: 0,
+  };
+
+  void addExpense(Expense expense) {
+    if (categoryExpenses.containsKey(expense.category)) {
+      categoryExpenses[expense.category] = (categoryExpenses[expense.category] ?? 0) + expense.amount;
+    } else {
+      print('Category ${expense.category} not found in categoryExpenses map.');
+    }
+  }
+
+  void removeExpense(Expense expense) {
+    if (categoryExpenses.containsKey(expense.category)) {
+      categoryExpenses[expense.category] = (categoryExpenses[expense.category] ?? 0) - expense.amount;
+    } else {
+      print('Category ${expense.category} not found in categoryExpenses map.');
+    }
+  }
+}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/widgets/expenses.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
 var kColorScheme = ColorScheme.fromSeed(seedColor: Color.fromARGB(156, 64, 155, 252));
 var kDarkColorScheme = ColorScheme.fromSeed(
   brightness: Brightness.dark,
